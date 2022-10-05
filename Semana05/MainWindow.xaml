@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Semana05"
+        xmlns:local="clr-namespace:Semana05" xmlns:viewmodel="clr-namespace:Semana05.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ManCategoriaViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        x:Name="myWindow">
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -17,19 +18,21 @@
 
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10px 10px 10px 10px">
-                <Label x:Name="lblID">ID</Label>
+                <Label Width="150px">ID</Label>
+                <Label x:Name="lblID" Content="{Binding ID}" ></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10px 10px 10px 10px">
-                <Label >Nombre</Label>
-                <TextBox x:Name="txtNombre" Margin="54px 0px 0px 0px" Width="300px"/>
+                <Label Width="150px">Nombre</Label>
+                <TextBox x:Name="txtNombre" Text="{Binding Nombre}"  Margin="30px 0px 0px 0px" Width="300px"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10px 10px 10px 10px" >
-                <Label >Descripcion</Label>
-                <TextBox x:Name="txtDescripcion" Margin="30px 0px 0px 0px" Width="300px"/>
+                <Label Width="150px">Descripcion</Label>
+                <TextBox x:Name="txtDescripcion" Text="{Binding Descripcion}" Margin="30px 0px 0px 0px" Width="300px"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10px 10px 10px 10px">
-                <Button Margin="10px 10px 10px 10px" x:Name="btnGrabar" Click="BtnGrabar_Click" >Grabar</Button>
-                <Button Margin="10px 10px 10px 10px" x:Name="btnCerrar" Click="BtnCerrar_Click"  >Cerrar</Button>
+                <Button Margin="10px 10px 10px 10px" x:Name="btnGrabar" Command="{Binding GrabarCommand}" CommandParameter="{Binding ElementName=myWindow}" >Grabar</Button>
+                <Button Margin="10px 10px 10px 10px" x:Name="btnCerrar" Command="{Binding CerrarCommand}"
+                        CommandParameter="{Binding ElementName=myWindow}">Cerrar</Button>
             </StackPanel>
         </StackPanel>
 

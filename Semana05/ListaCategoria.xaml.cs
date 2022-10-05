@@ -1,5 +1,6 @@
 ﻿using Business;
 using Entity;
+using Semana05.ViewModel;
 using System;
 
 using System.Windows;
@@ -12,40 +13,13 @@ namespace Semana05
     /// </summary>
     public partial class ListaCategoria : Window
     {
+
+        ListaCategoriaViewModel viewModel;
         public ListaCategoria()
         {
             InitializeComponent();
-        }
-
-        private void BtnConsultar_Click(object sender, RoutedEventArgs e)
-        {
-            Cargar();
-        }
-
-        private void Cargar()
-        {
-            BCategoria Bcategoria = null;
-            try
-            {
-                Bcategoria = new BCategoria();
-                dgvCategoria.ItemsSource = Bcategoria.Listar(0);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Comunicarse con el Administrador");
-               
-            }
-            finally
-            {
-                Bcategoria = null;
-            }
-        }
-
-        private void BtnNuevo_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow manCategoria = new MainWindow(0);
-            manCategoria.ShowDialog();
-            Cargar();
+            viewModel = new ListaCategoriaViewModel();
+            this.DataContext = viewModel;
         }
 
         private void DgvCategoria_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,7 +30,7 @@ namespace Semana05
             idCategoria = Convert.ToInt32(item.IdCategoria);
             MainWindow manCategoria = new MainWindow(idCategoria);
             manCategoria.ShowDialog();
-            Cargar();
+            
         }
 
     }

@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\ListaCategoriaViewModel.cs" />
+    <Compile Include="ViewModel\ManCategoriaViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="ListaCategoria.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +91,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\CategoriaModel.cs" />
     <Compile Include="Product.xaml.cs">
       <DependentUpon>Product.xaml</DependentUpon>
     </Compile>

@@ -36,6 +36,8 @@ namespace Semana05
                     else
                     {
                         checkActive.IsChecked = false;
+                        btnEliminarDefinitivo.IsEnabled = true;
+                        btnEliminar.IsEnabled = false;
                     }
 
                 }

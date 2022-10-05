@@ -1,5 +1,6 @@
 ﻿using Business;
 using Entity;
+using Semana05.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,16 @@ namespace Semana05
     /// </summary>
     public partial class MainWindow : Window
     {
+        ManCategoriaViewModel viewModel;
+
         public int ID { get; set; }
+
         public MainWindow(int Id)
         {
             InitializeComponent();
             ID = Id;
+            viewModel = new ManCategoriaViewModel();
+            this.DataContext = viewModel;
             if (ID > 0)
             {
                 BCategoria bCategoria = new BCategoria();
@@ -34,50 +40,10 @@ namespace Semana05
                 categorias = bCategoria.Listar(ID);
                 if (categorias.Count > 0)
                 {
-                    lblID.Content = categorias[0].IdCategoria.ToString();
-                    txtNombre.Text = categorias[0].NombreCategoria;
-                    txtDescripcion.Text = categorias[0].Descripcion;
+                    viewModel.ID = categorias[0].IdCategoria;
+                    viewModel.Nombre = categorias[0].NombreCategoria;
+                    viewModel.Descripcion = categorias[0].Descripcion;
                 }
-            }
-        }
-
-        private void BtnGrabar_Click(object sender, RoutedEventArgs e)
-        {
-            BCategoria Bcategoria = null;
-            bool result = true;
-
-            try
-            {
-                Bcategoria = new BCategoria();
-                if (ID > 0)
-                {
-                    result = Bcategoria.Actualizar(new Categoria
-                    {
-                        IdCategoria = ID,
-                        NombreCategoria = txtNombre.Text,
-                        Descripcion = txtDescripcion.Text
-                    });
-                }
-                else
-                {
-                    result = Bcategoria.Insertar(new Categoria
-                    {
-                        NombreCategoria = txtNombre.Text,
-                        Descripcion = txtDescripcion.Text
-                    });
-                }
-                if (!result)
-                {
-                    MessageBox.Show("Comunicarse con el Administrador");
-                }
-                Close();
-            }catch(Exception)
-            {
-                MessageBox.Show("Comunicarse con el Administrador");
-            }
-            finally
-            {
-                Bcategoria = null;
             }
         }
 
